@@ -1,5 +1,6 @@
 package ru.practicum.dinner;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -41,25 +42,46 @@ public class Main {
         System.out.println("Введите название блюда:");
         String dishName = scanner.nextLine();
 
-        // добавьте новое блюдо
+        dc.addNewDish(dishType, dishName);// добавьте новое блюдо
     }
 
     private static void generateDishCombo() {
         System.out.println("Начинаем конструировать обед...");
 
         System.out.println("Введите количество наборов, которые нужно сгенерировать:");
-        int numberOfCombos = scanner.nextInt();
+        int numberOfCombos;
+        while (true) {
+            if (scanner.hasNextInt()) {
+                numberOfCombos = scanner.nextInt();
+                if (numberOfCombos < 0){
+                    System.out.println("Количество наборов не может быть отрицательным");
+                } else if (numberOfCombos == 0){
+                    System.out.println("Путсть будет хотя бы 1 набор");
+                } else {
+                    break;
+                }
+            } else {
+                System.out.println(scanner.next() + " не является числом.");
+            }
+            System.out.println("Введите количество наборов, которые нужно сгенерировать:");
+        }
         scanner.nextLine();
 
         System.out.println("Вводите типы блюда, разделяя символом переноса строки (enter). Для завершения ввода введите пустую строку");
         String nextItem = scanner.nextLine();
+        ArrayList<String> types = new ArrayList<>();
 
         //реализуйте ввод типов блюд
         while (!nextItem.isEmpty()) {
-
+            if (dc.contains(nextItem)){
+                types.add(nextItem);
+            } else {
+                System.out.println("Такого типа блюд нет в списке, попробуйте снова:");
+            }
+            nextItem = scanner.nextLine();
         }
 
         // сгенерируйте комбинации блюд и выведите на экран
-
+        dc.generateDishCombo(numberOfCombos, types);
     }
 }
