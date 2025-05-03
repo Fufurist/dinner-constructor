@@ -13,7 +13,9 @@ public class DinnerConstructor {
 
     void addNewDish(String dishType, String dishName){
         if (dishesByCategories.containsKey(dishType)){
-            dishesByCategories.get(dishType).add(dishName);
+            if (!dishesByCategories.get(dishType).contains(dishName)) {
+                dishesByCategories.get(dishType).add(dishName);
+            }
         } else {
             ArrayList<String> newDishList = new ArrayList<>();
             newDishList.add(dishName);
