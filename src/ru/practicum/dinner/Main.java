@@ -1,5 +1,6 @@
 package ru.practicum.dinner;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,7 +17,7 @@ public class Main {
             printMenu();
             String command = scanner.nextLine();
 
-            switch (command) {
+            switch (command.trim()) {
                 case "1":
                     addNewDish();
                     break;
@@ -24,7 +25,10 @@ public class Main {
                     generateDishCombo();
                     break;
                 case "3":
+                    System.out.println("На этом моя миссия подходит к концу.");
                     return;
+                default:
+                    System.out.println("Команда не распознана. Попробуйте снова.");
             }
         }
     }
@@ -38,9 +42,9 @@ public class Main {
 
     private static void addNewDish() {
         System.out.println("Введите тип блюда:");
-        String dishType = scanner.nextLine();
+        String dishType = scanner.nextLine().trim();
         System.out.println("Введите название блюда:");
-        String dishName = scanner.nextLine();
+        String dishName = scanner.nextLine().trim();
 
         dc.addNewDish(dishType, dishName);// добавьте новое блюдо
     }
@@ -74,8 +78,8 @@ public class Main {
 
         //реализуйте ввод типов блюд
         while (!nextItem.isEmpty()) {
-            if (dc.contains(nextItem)){
-                types.add(nextItem);
+            if (dc.contains(nextItem.trim())){
+                types.add(nextItem.trim());
             } else {
                 System.out.println("Такого типа блюд нет в списке, попробуйте снова:");
             }
@@ -85,8 +89,10 @@ public class Main {
         // сгенерируйте комбинации блюд и выведите на экран
         for (int i = 0; i < numberOfCombos; i++) {
             ArrayList<String> combo = dc.generateDishCombo(types);
+
+            System.out.print(i);
             for (String dish : combo){
-                System.out.print(dish + " ");
+                System.out.print(" - " + dish);
             }
             System.out.println();
         }
