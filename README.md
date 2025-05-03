@@ -1,2 +1,2 @@
 # dinner-constructor
-Precode for sprint 3 dinner constructor
+Реализация проекта третьего спринта от Григорьева Ивана.
