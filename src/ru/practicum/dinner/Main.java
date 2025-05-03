@@ -54,9 +54,9 @@ public class Main {
             if (scanner.hasNextInt()) {
                 numberOfCombos = scanner.nextInt();
                 if (numberOfCombos < 0){
-                    System.out.println("Количество наборов не может быть отрицательным");
+                    System.out.println("Количество наборов не может быть отрицательным.");
                 } else if (numberOfCombos == 0){
-                    System.out.println("Путсть будет хотя бы 1 набор");
+                    System.out.println("Путсть будет хотя бы 1 набор.");
                 } else {
                     break;
                 }
@@ -67,7 +67,8 @@ public class Main {
         }
         scanner.nextLine();
 
-        System.out.println("Вводите типы блюда, разделяя символом переноса строки (enter). Для завершения ввода введите пустую строку");
+        System.out.println("Вводите типы блюда, разделяя символом переноса строки (enter). Для завершения ввода " +
+                "введите пустую строку.");
         String nextItem = scanner.nextLine();
         ArrayList<String> types = new ArrayList<>();
 
@@ -82,6 +83,16 @@ public class Main {
         }
 
         // сгенерируйте комбинации блюд и выведите на экран
-        dc.generateDishCombo(numberOfCombos, types);
+        for (int i = 0; i < numberOfCombos; i++) {
+            ArrayList<String> combo = dc.generateDishCombo(types);
+            for (String dish : combo){
+                System.out.print(dish + " ");
+            }
+            System.out.println();
+        }
+        //Я решил, что раз
+        //"Важное условие: весь код, который взаимодействует с пользователем, должен находиться в классе Main.".
+        //То все выводы тоже должны быть внутри main. Поэтому генерация блюда останется внутри отведённого класса
+        //но вывод получившейся комбинации обязан быть тут
     }
 }

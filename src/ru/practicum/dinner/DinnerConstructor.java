@@ -12,11 +12,23 @@ public class DinnerConstructor {
     }
 
     void addNewDish(String dishType, String dishName){
-
+        if (dishesByCategories.containsKey(dishType)){
+            dishesByCategories.get(dishType).add(dishName);
+        } else {
+            ArrayList<String> newDishList = new ArrayList<>();
+            newDishList.add(dishName);
+            dishesByCategories.put(dishType, newDishList);
+        }
     }
 
-    void generateDishCombo(int quantity, ArrayList<String> dishes){
-
+    ArrayList<String> generateDishCombo(ArrayList<String> types){
+        ArrayList<String> output = new ArrayList<>();
+        Random random = new Random();
+        for (String type : types){
+            ArrayList<String> dishesInType = dishesByCategories.get(type);
+            output.add(dishesInType.get(random.nextInt(dishesInType.size())));
+        }
+        return output;
     }
 
     boolean contains(String type){
